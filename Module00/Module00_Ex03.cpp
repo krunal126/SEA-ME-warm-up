@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <limits>
 class Contact
 {
 private:
@@ -170,7 +170,7 @@ int main()
     while (true)
     {
         std::string command;
-        std::cout << "(ADD, SEARCH, BOOKMARK, LIST, REMOVE, EXIT):" << std::endl;
+        std::cout << "(ADD, SEARCH, BOOKMARK, REMOVE, EXIT):" << std::endl;
         std::cout << "Enter command: ";
         std::cin >> command;
 
@@ -182,27 +182,40 @@ int main()
         {
             phonebook.searchContacts();
             int index;
+
             std::cout << "Enter index to display contact details: ";
-            std::cin >> index;
+            while (!(std::cin >> index))
+            {
+                std::cin.clear();                                                   // Clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the invalid input
+                std::cout << "Invalid input. Please enter an index value: ";
+            }
             phonebook.displayContactDetails(index);
+            int index1;
+            std::cout << "Enter index to toggle contact bookmark or Remove bookmark status: ";
+            while (!(std::cin >> index1))
+            {
+                std::cin.clear();                                                   // Clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the invalid input
+                std::cout << "Invalid input. Please enter an index value: ";
+            }
+            phonebook.toggleBookmark(index1);
         }
         else if (command == "BOOKMARK")
         {
-            int index;
-            std::cout << "Enter index to toggle contact bookmark or Remove bookmark status: ";
-            std::cin >> index;
-            phonebook.toggleBookmark(index);
+            phonebook.listBookmarkedContacts();
         }
         else if (command == "REMOVE")
         {
             int index;
             std::cout << "Enter Index No. to remove contact: ";
-            std::cin >> index;
+            while (!(std::cin >> index))
+            {
+                std::cin.clear();                                                   // Clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the invalid input
+                std::cout << "Invalid input. Please enter an index value: ";
+            }
             phonebook.removeContact(index);
-        }
-        else if (command == "LIST")
-        {
-            phonebook.listBookmarkedContacts();
         }
         else if (command == "EXIT")
         {
