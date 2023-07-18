@@ -19,7 +19,7 @@ public:
     }
 
     // Member function to drive the car
-    void driveBase()
+    void drive()
     {
         std::cout << "Driving " << make << " " << model << " " << year << " edition." << std::endl;
     }
@@ -41,7 +41,7 @@ public:
     // Function to drive the sports car, overriding the base class function
     void drive()
     {
-        driveBase(); // Call the base class driveBase() function
+        drive(); // Call the base class driveBase() function
         std::cout << "Top Speed: " << topSpeed << " mph" << std::endl;
     }
 };
